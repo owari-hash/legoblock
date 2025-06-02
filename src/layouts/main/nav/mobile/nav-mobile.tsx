@@ -1,20 +1,16 @@
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import List from '@mui/material/List';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 
-import Logo from 'src/components/logo';
-import Iconify from 'src/components/iconify';
 import { usePathname } from 'src/routes/hooks';
+import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
-import { useBoolean } from 'src/hooks/use-boolean';
+import OrderDialog from 'src/components/order/order-dialog';
 
 import { NavProps } from '../types';
-import { NAV } from '../../../config-layout';
-
 import NavList from './nav-list';
 
 // ----------------------------------------------------------------------
@@ -22,47 +18,55 @@ import NavList from './nav-list';
 export default function NavMobile({ data }: NavProps) {
   const pathname = usePathname();
 
-  const mobileOpen = useBoolean();
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
-    if (mobileOpen.value) {
-      mobileOpen.onFalse();
+    if (openMenu) {
+      setOpenMenu(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
     <>
-      <IconButton onClick={mobileOpen.onTrue} sx={{ ml: 1, color: 'inherit' }}>
+      <IconButton onClick={() => setOpenMenu(true)} sx={{ ml: 1, color: 'inherit' }}>
         <Iconify icon="carbon:menu" />
       </IconButton>
 
       <Drawer
-        open={mobileOpen.value}
-        onClose={mobileOpen.onFalse}
+        open={openMenu}
+        onClose={() => setOpenMenu(false)}
         PaperProps={{
           sx: {
             pb: 5,
-            width: NAV.W_VERTICAL,
+            width: 260,
           },
         }}
       >
         <Scrollbar>
-          <Logo sx={{ mx: 2.5, my: 3 }} />
-
-          <List component="nav" disablePadding>
+          <List sx={{ px: 2 }}>
             {data.map((link) => (
               <NavList key={link.title} item={link} />
             ))}
-          </List>
 
-          <Stack spacing={1.5} sx={{ p: 3 }}>
-            <Button fullWidth variant="contained" color="inherit">
-              Buy Now
+            <Button
+              fullWidth
+              variant="contained"
+              color="inherit"
+              onClick={() => {
+                setOpenDialog(true);
+                setOpenMenu(false);
+              }}
+              sx={{ mt: 2 }}
+            >
+              <Typography variant="subtitle2">Захиалга өгөх</Typography>
             </Button>
-          </Stack>
+          </List>
         </Scrollbar>
       </Drawer>
+
+      <OrderDialog open={openDialog} onClose={() => setOpenDialog(false)} />
     </>
   );
 }
