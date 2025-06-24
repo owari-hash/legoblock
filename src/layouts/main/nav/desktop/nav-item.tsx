@@ -52,3 +52,5 @@ export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(function NavItem
     );
   }
 );
+
+NavItem.displayName = 'NavItem';

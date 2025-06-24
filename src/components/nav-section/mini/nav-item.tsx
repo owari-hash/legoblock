@@ -152,4 +152,6 @@ const NavItem = forwardRef<HTMLDivElement, Props>(function NavItem(
   }
 );
 
+NavItem.displayName = 'NavItem';
+
 export default NavItem;

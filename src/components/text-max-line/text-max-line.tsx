@@ -42,4 +42,6 @@ const TextMaxLine = forwardRef<HTMLAnchorElement, TextMaxLineProps>(function Tex
   }
 );
 
+TextMaxLine.displayName = 'TextMaxLine';
+
 export default TextMaxLine;

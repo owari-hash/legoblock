@@ -67,4 +67,6 @@ const OrderDialog = forwardRef<HTMLDivElement, Props>(function OrderDialog({ ope
   );
 });
 
+OrderDialog.displayName = 'OrderDialog';
+
 export default OrderDialog;

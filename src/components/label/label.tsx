@@ -43,4 +43,6 @@ const Label = forwardRef<HTMLSpanElement, LabelProps>(function Label(
   }
 );
 
+Label.displayName = 'Label';
+
 export default Label;

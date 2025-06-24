@@ -104,6 +104,8 @@ const ParentItem = forwardRef<HTMLDivElement, ParentItemProps>(function ParentIt
   );
 });
 
+ParentItem.displayName = 'ParentItem';
+
 // ----------------------------------------------------------------------
 
 type SubMenuProps = {
