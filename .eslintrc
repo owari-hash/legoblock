@@ -123,7 +123,8 @@
         "type": "line-length",
         "order": "asc"
       }
-    ]
+    ],
+    "prefer-arrow-callback": "off"
   },
   "overrides": [
     {

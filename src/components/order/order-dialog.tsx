@@ -17,7 +17,7 @@ type Props = {
   onClose: () => void;
 };
 
-const OrderDialog = forwardRef<HTMLDivElement, Props>(({ open, onClose }, ref) => {
+const OrderDialog = forwardRef<HTMLDivElement, Props>(function OrderDialog({ open, onClose }, ref) {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     onClose();

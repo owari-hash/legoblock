@@ -8,9 +8,11 @@ import useTypography from './use-typography';
 
 // ----------------------------------------------------------------------
 
-const TextMaxLine = forwardRef<HTMLAnchorElement, TextMaxLineProps>(
-  ({ asLink, variant = 'body1', line = 2, persistent = false, children, sx, ...other }, ref) => {
-    const { lineHeight } = useTypography(variant);
+const TextMaxLine = forwardRef<HTMLAnchorElement, TextMaxLineProps>(function TextMaxLine(
+  { asLink, variant = 'body1', line = 2, persistent = false, children, sx, ...other },
+  ref
+) {
+  const { lineHeight } = useTypography(variant);
 
     const styles = {
       overflow: 'hidden',

@@ -18,9 +18,11 @@ type Props = NavItemProps & {
   config: NavConfigProps;
 };
 
-const NavItem = forwardRef<HTMLDivElement, Props>(
-  ({ item, depth, open, active, externalLink, config, ...other }, ref) => {
-    const { title, path, icon, info, children, disabled, caption, roles } = item;
+const NavItem = forwardRef<HTMLDivElement, Props>(function NavItem(
+  { item, depth, open, active, externalLink, config, ...other },
+  ref
+) {
+  const { title, path, icon, info, children, disabled, caption, roles } = item;
 
     const subItem = depth !== 1;
 

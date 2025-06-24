@@ -9,9 +9,8 @@ import { ImageProps } from './types';
 
 // ----------------------------------------------------------------------
 
-const Image = forwardRef<HTMLSpanElement, ImageProps>(
-  (
-    {
+const Image = forwardRef<HTMLSpanElement, ImageProps>(function Image(
+  {
       ratio,
       overlay,
       disabledEffect = false,
@@ -33,8 +32,8 @@ const Image = forwardRef<HTMLSpanElement, ImageProps>(
       ...other
     },
     ref
-  ) => {
-    const theme = useTheme();
+) {
+  const theme = useTheme();
 
     const overlayStyles = !!overlay && {
       '&:before': {

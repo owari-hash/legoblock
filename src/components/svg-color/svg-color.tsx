@@ -8,9 +8,10 @@ export interface SvgColorProps extends BoxProps {
   src: string;
 }
 
-const SvgColor = forwardRef<HTMLSpanElement, SvgColorProps>(({ src, sx, ...other }, ref) => (
-  <Box
-    component="span"
+const SvgColor = forwardRef<HTMLSpanElement, SvgColorProps>(function SvgColor({ src, sx, ...other }, ref) {
+  return (
+    <Box
+      component="span"
     className="svg-color"
     ref={ref}
     sx={{
@@ -24,6 +25,7 @@ const SvgColor = forwardRef<HTMLSpanElement, SvgColorProps>(({ src, sx, ...other
     }}
     {...other}
   />
-));
+  );
+});
 
 export default SvgColor;

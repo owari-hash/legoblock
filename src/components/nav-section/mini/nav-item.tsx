@@ -18,9 +18,11 @@ type Props = NavItemProps & {
   config: NavConfigProps;
 };
 
-const NavItem = forwardRef<HTMLDivElement, Props>(
-  ({ item, depth, open, active, externalLink, config, ...other }, ref) => {
-    const theme = useTheme();
+const NavItem = forwardRef<HTMLDivElement, Props>(function NavItem(
+  { item, depth, open, active, externalLink, config, ...other },
+  ref
+) {
+  const theme = useTheme();
 
     const { title, path, icon, children, disabled, caption, roles } = item;
 

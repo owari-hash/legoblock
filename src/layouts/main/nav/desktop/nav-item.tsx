@@ -11,10 +11,12 @@ import { StyledNavItem } from './styles';
 
 // ----------------------------------------------------------------------
 
-export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(
-  ({ item, open, active, subItem, externalLink, ...other }, ref) => {
-    const renderContent = (
-      <StyledNavItem
+export const NavItem = forwardRef<HTMLDivElement, NavItemProps>(function NavItem(
+  { item, open, active, subItem, externalLink, ...other },
+  ref
+) {
+  const renderContent = (
+    <StyledNavItem
         ref={ref}
         disableRipple
         subItem={subItem}

@@ -75,8 +75,11 @@ export default function MegaMenuMobile({ data, open, action, onOpen, onClose }: 
 
 // ----------------------------------------------------------------------
 
-const ParentItem = forwardRef<HTMLDivElement, ParentItemProps>(
-  ({ icon, title, hasSub, ...other }, ref) => (
+const ParentItem = forwardRef<HTMLDivElement, ParentItemProps>(function ParentItem(
+  { icon, title, hasSub, ...other },
+  ref
+) {
+  return (
     <ListItemButton
       ref={ref}
       sx={{
@@ -98,8 +101,8 @@ const ParentItem = forwardRef<HTMLDivElement, ParentItemProps>(
 
       {hasSub && <Iconify icon="eva:arrow-ios-forward-fill" width={16} />}
     </ListItemButton>
-  )
-);
+  );
+});
 
 // ----------------------------------------------------------------------
 
