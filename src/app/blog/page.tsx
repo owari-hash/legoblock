@@ -1,13 +1,15 @@
 'use client';
 
 import { useScroll } from 'framer-motion';
+
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+
 import MainLayout from 'src/layouts/main';
-import ScrollProgress from 'src/components/scroll-progress';
+import { _blogPosts } from 'src/_mock/_blog';
 import { MotionViewport } from 'src/components/animate';
 import BlogContent from 'src/sections/blog/blog-content';
-import { _blogPosts } from 'src/_mock/_blog';
+import ScrollProgress from 'src/components/scroll-progress';
 
 export default function BlogPage() {
   const { scrollYProgress } = useScroll();

@@ -1,6 +1,8 @@
 import { usePathname } from 'src/routes/hooks';
 import { useActiveLink } from 'src/routes/hooks/use-active-link';
+
 import { NavItemBaseProps } from '../types';
+
 import { NavItem } from './nav-item';
 
 // ----------------------------------------------------------------------

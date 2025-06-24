@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import List from '@mui/material/List';
 import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 
-import { usePathname } from 'src/routes/hooks';
 import Iconify from 'src/components/iconify';
+import { usePathname } from 'src/routes/hooks';
 import Scrollbar from 'src/components/scrollbar';
 import OrderDialog from 'src/components/order/order-dialog';
 
 import { NavProps } from '../types';
+
 import NavList from './nav-list';
 
 // ----------------------------------------------------------------------

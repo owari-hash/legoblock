@@ -2,16 +2,16 @@
 
 import { useScroll } from 'framer-motion';
 
+import { _projectHome } from 'src/_mock/_project';
 import { _blogPosts, _pricingHome } from 'src/_mock';
 import ScrollProgress from 'src/components/scroll-progress';
 
-import HomeHero from '../home-hero';
 import HomeFAQs from '../home-faqs';
+import HomeHero from '../home-hero';
 import HomeNewStart from '../home-new-start';
 import PricingHome from '../../product/home/pricing-home';
 import HomeFeatureHighlights from '../home-feature-highlights';
 import HomeFlexibleComponents from '../home-flexible-components';
-import { _projectHome } from 'src/_mock/_project';
 
 // ----------------------------------------------------------------------
 

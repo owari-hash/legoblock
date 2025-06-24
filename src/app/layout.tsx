@@ -2,14 +2,15 @@ import 'src/global.css';
 
 // ----------------------------------------------------------------------
 
+import { Metadata, Viewport } from 'next';
+
 import ThemeProvider from 'src/theme';
-import { primaryFont } from 'src/theme/typography';
+import { defaultMetadata } from 'src/config/seo';
 import { LocalizationProvider } from 'src/locales';
+import { primaryFont } from 'src/theme/typography';
 import ProgressBar from 'src/components/progress-bar';
 import MotionLazy from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
-import { Metadata, Viewport } from 'next';
-import { defaultMetadata } from 'src/config/seo';
 
 // ----------------------------------------------------------------------
 

@@ -1,9 +1,8 @@
+import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
 
-import { _socials } from 'src/_mock';
 import Logo from 'src/components/logo';
 import { usePathname } from 'src/routes/hooks';
 
@@ -33,7 +32,7 @@ export default function Footer() {
           overflow: 'hidden',
           py: { xs: 8, md: 10 },
         }}
-      ></Container>
+       />
 
       <Divider />
 

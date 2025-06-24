@@ -1,6 +1,8 @@
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
+import Container from '@mui/material/Container';
+
 import { _projectHome } from 'src/_mock/_project';
+
 import ProjectHomeCard from './project-home-card';
 
 export default function ProjectHome() {

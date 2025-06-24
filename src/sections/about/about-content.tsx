@@ -1,10 +1,12 @@
 import { m } from 'framer-motion';
-import Grid from '@mui/material/Unstable_Grid2';
-import Stack from '@mui/material/Stack';
+
 import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import { varFade, MotionViewport } from 'src/components/animate';
+
 import Iconify from 'src/components/iconify';
+import { varFade, MotionViewport } from 'src/components/animate';
 
 export default function AboutContent() {
   return (

@@ -1,5 +1,3 @@
-import { _mock } from './_mock';
-import { _tags } from './assets';
 
 export const _blogPosts = [
   {

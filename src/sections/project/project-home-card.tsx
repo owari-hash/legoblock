@@ -2,8 +2,9 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import { IProject } from 'src/types/project';
+
 import Image from 'src/components/image';
+import { IProject } from 'src/types/project';
 
 type Props = {
   project: IProject;

@@ -1,14 +1,16 @@
 import { m } from 'framer-motion';
-import Grid from '@mui/material/Unstable_Grid2';
-import Stack from '@mui/material/Stack';
-import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { varFade } from 'src/components/animate';
-import Iconify from 'src/components/iconify';
-import { IBlogPost } from 'src/types/blog';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
+
+import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Unstable_Grid2';
+import Typography from '@mui/material/Typography';
+
+import { IBlogPost } from 'src/types/blog';
+import Iconify from 'src/components/iconify';
+import { varFade } from 'src/components/animate';
 
 export default function BlogContent({ posts }: { posts: IBlogPost[] }) {
   const router = useRouter();

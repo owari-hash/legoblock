@@ -1,6 +1,7 @@
 'use client';
 
 import { useScroll } from 'framer-motion';
+
 import MainLayout from 'src/layouts/main';
 import ScrollProgress from 'src/components/scroll-progress';
 import ProjectView from 'src/sections/project/view/project-view';

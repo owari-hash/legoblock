@@ -6,8 +6,6 @@ import { useTheme } from '@mui/material/styles';
 
 import { bgBlur } from 'src/theme/css';
 import Logo from 'src/components/logo';
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 
 import { HEADER } from '../config-layout';

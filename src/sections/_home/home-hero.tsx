@@ -2,17 +2,13 @@ import { useRef } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import Image from 'src/components/image';
 import { bgGradient } from 'src/theme/css';
-import Iconify from 'src/components/iconify';
-import SvgColor from 'src/components/svg-color';
 import { HEADER } from 'src/layouts/config-layout';
 import { useResponsive } from 'src/hooks/use-responsive';
 import { useBoundingClientRect } from 'src/hooks/use-bounding-client-rect';

@@ -5,7 +5,7 @@
     "es2021": true
   },
   "plugins": ["perfectionist", "unused-imports", "@typescript-eslint", "prettier"],
-  "extends": ["airbnb", "airbnb-typescript", "airbnb/hooks", "prettier"],
+  "extends": ["airbnb", "airbnb-typescript", "prettier", "next/core-web-vitals"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -125,30 +125,33 @@
       }
     ]
   },
-  "[javascript]": {
-    "env": {
-      "browser": true,
-      "es2021": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "env": {
+        "browser": true,
+        "es2021": true
       },
-      "ecmaVersion": 12,
-      "sourceType": "module",
-      "project": "./tsconfig.json"
-    },
-    "plugins": ["react", "@typescript-eslint"],
-    "settings": {
-      "react": {
-        "version": "detect"
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+      },
+      "plugins": ["react", "@typescript-eslint"],
+      "settings": {
+        "react": {
+          "version": "detect"
+        }
       }
     }
-  }
+  ]
 }

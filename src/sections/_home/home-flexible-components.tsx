@@ -1,10 +1,9 @@
-import { m } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
 
 import Container from '@mui/material/Container';
+
 import AboutContent from 'src/sections/about/about-content';
 
-import { _mock } from 'src/_mock';
 
 // ----------------------------------------------------------------------
 
