@@ -124,7 +124,8 @@
         "order": "asc"
       }
     ],
-    "prefer-arrow-callback": "off"
+    "prefer-arrow-callback": "off",
+    "react/display-name": "off"
   },
   "overrides": [
     {
