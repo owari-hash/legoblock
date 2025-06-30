@@ -17,7 +17,7 @@ export const pageLinks = [
 
 export const navConfig = [
   { title: 'Нүүр хуудас', path: '/' },
-  { title: 'Бүтээгдэхүүн', path: paths.landing.product },
+  { title: 'Бүтээгдэхүүн', path: paths.landing.products },
   { title: 'Төсөл', path: paths.landing.project },
   { title: 'Бидний тухай', path: paths.landing.aboutus },
   { title: 'Блог', path: paths.landing.blog },

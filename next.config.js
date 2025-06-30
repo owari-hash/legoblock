@@ -1,4 +1,5 @@
 module.exports = {
+  productionBrowserSourceMaps: false,
   trailingSlash: true,
   modularizeImports: {
     '@mui/material': {
@@ -7,12 +8,5 @@ module.exports = {
     '@mui/lab': {
       transform: '@mui/lab/{{member}}',
     },
-  },
-  webpack(config) {
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack'],
-    });
-    return config;
   },
 };

@@ -17,20 +17,30 @@ export type IProductItemCompareProps = {
 };
 
 export type IProductItemProps = {
-  id: string;
+  id: number;
   name: string;
-  sold: number;
-  label: string;
-  price: number;
-  caption: string;
-  stock: number;
-  coverUrl: string;
-  category: string;
-  images: string[];
-  priceSale: number;
-  ratingNumber: number;
+  size_length: number;
+  size_width: number;
+  size_height: number;
+  weight_kg: string;
+  loading?: boolean;
+  price_mnt: number;
   description: string;
-  totalReviews: number;
+  image_url: string;
+  in_stock: boolean;
+  created_at: string;
+  tags: string;
+  is_featured: boolean;
+  product_type: number;
+  product_type_name?: string;
+  sold: number;
+  label?: string;
+  caption?: string;
+  stock: number;
+  images?: string[];
+  priceSale?: number;
+  ratingNumber?: number;
+  totalReviews?: number;
 };
 
 export type IProductFiltersProps = {
@@ -38,7 +48,7 @@ export type IProductFiltersProps = {
   filterStock: boolean;
   filterBrand: string[];
   filterShipping: string[];
-  filterCategories: string;
+  filterCategories: number | null;
   filterRating: string | null;
   filterPrice: {
     start: number;

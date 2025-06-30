@@ -30,7 +30,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="mn" className={primaryFont.className}>
+    <html lang="en" className={primaryFont.className}>
       <body>
         <LocalizationProvider>
           <SettingsProvider
