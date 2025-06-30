@@ -42,7 +42,7 @@ export default function ProductList({
             md: 'repeat(3, 1fr)',
           }}
         >
-          {(loading ? [...Array(productsPerPage)] : products).map((product, index) =>
+          {(loading ? [...Array(productsPerPage)] : products || []).map((product, index) =>
             product ? (
               <EcommerceProductViewGridItem key={product.id} product={product} />
             ) : (
@@ -52,7 +52,7 @@ export default function ProductList({
         </Box>
       ) : (
         <Stack spacing={4}>
-          {(loading ? [...Array(productsPerPage)] : products).map((product, index) =>
+          {(loading ? [...Array(productsPerPage)] : products || []).map((product, index) =>
             product ? (
               <EcommerceProductViewListItem key={product.id} product={product} />
             ) : (
