@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -13,7 +13,6 @@ import FormControl from '@mui/material/FormControl';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { IProductItemProps } from 'src/types/product'; // or wherever your type is
 
 import Iconify from 'src/components/iconify';
 import { useBoolean } from 'src/hooks/use-boolean';
@@ -21,8 +20,6 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import ProductFilters from '../filters/filters';
 import ProductList from '../list/product-list';
 import ProductListBestSellers from '../list/product-list-best-sellers';
-
-import { getProducts } from 'src/utils/api'; // your API helper
 
 const VIEW_OPTIONS = [
   { value: 'list', icon: <Iconify icon="carbon:list-boxes" /> },
@@ -43,23 +40,6 @@ export default function ProductView() {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState('latest');
   const [viewMode, setViewMode] = useState('grid');
-  const [products, setProducts] = useState<IProductItemProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      setLoading(true);
-      try {
-        const data = await getProducts({ page, perPage: PRODUCTS_PER_PAGE, sort });
-        setProducts(data.items);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
-  }, [page, sort, PRODUCTS_PER_PAGE]);
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -79,7 +59,7 @@ export default function ProductView() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 5 }}>
-        <Typography variant="h3">Төрөл</Typography>
+        <Typography variant="h3">Catalog</Typography>
 
         <Button
           color="inherit"
@@ -95,8 +75,7 @@ export default function ProductView() {
       <Stack direction={{ xs: 'column-reverse', md: 'row' }} sx={{ mb: { xs: 8, md: 10 } }}>
         <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
           <ProductFilters open={mobileOpen.value} onClose={mobileOpen.onFalse} />
-          {/* Now products exist here */}
-          <ProductListBestSellers products={(products || []).slice(0, 3)} />
+          {/* You can move best sellers fetching to ProductList if you want */}
         </Stack>
 
         <Box sx={{ flexGrow: 1, pl: { md: 8 }, width: { md: `calc(100% - 280px)` } }}>
@@ -127,13 +106,11 @@ export default function ProductView() {
           </Stack>
 
           <ProductList
-            products={products}
             viewMode={viewMode}
             page={page}
             productsPerPage={PRODUCTS_PER_PAGE}
+            sort={sort}
             onPageChange={handlePageChange}
-            totalPages={Math.ceil((products?.length || 0) / PRODUCTS_PER_PAGE)}
-            loading={loading}
           />
         </Box>
       </Stack>

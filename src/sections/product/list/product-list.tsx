@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
@@ -10,25 +12,49 @@ import EcommerceProductViewGridItem from '../item/product-view-grid-item';
 import EcommerceProductViewListItemSkeleton from '../item/product-view-list-item-skeleton';
 import EcommerceProductViewGridItemSkeleton from '../item/product-view-grid-item-skeleton';
 
-export interface ProductListProps {
-  products: IProductItemProps[];
+import { getProducts } from 'src/utils/api'; // your API util to fetch products
+
+type Props = {
   viewMode: string;
   page: number;
   productsPerPage: number;
-  onPageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
-  totalPages: number;
-  loading: boolean;
-}
+  sort: string;
+  onPageChange: (event: React.ChangeEvent<unknown>, page: number) => void;
+};
 
 export default function ProductList({
-  products,
   viewMode,
   page,
   productsPerPage,
+  sort,
   onPageChange,
-  totalPages,
-  loading,
-}: ProductListProps) {
+}: Props) {
+  const [products, setProducts] = useState<IProductItemProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchProducts = async () => {
+      try {
+        // You may want to extend getProducts to accept sort/page params
+        // e.g., getProducts({ page, perPage: productsPerPage, sort })
+        const data = await getProducts({ page, perPage: productsPerPage, sort });
+        setProducts(data.items); // assume API returns { items: [], totalCount: number }
+        setTotalPages(Math.ceil(data.totalCount / productsPerPage));
+      } catch (error) {
+        console.error('Error loading products:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [page, productsPerPage, sort]);
+
+  // slice is no longer needed, since API returns only current page items
+  // but if your API returns all, you can slice here instead
+
   return (
     <>
       {viewMode === 'grid' ? (
@@ -42,7 +68,7 @@ export default function ProductList({
             md: 'repeat(3, 1fr)',
           }}
         >
-          {(loading ? [...Array(productsPerPage)] : products || []).map((product, index) =>
+          {(loading ? [...Array(productsPerPage)] : products).map((product, index) =>
             product ? (
               <EcommerceProductViewGridItem key={product.id} product={product} />
             ) : (
@@ -52,7 +78,7 @@ export default function ProductList({
         </Box>
       ) : (
         <Stack spacing={4}>
-          {(loading ? [...Array(productsPerPage)] : products || []).map((product, index) =>
+          {(loading ? [...Array(productsPerPage)] : products).map((product, index) =>
             product ? (
               <EcommerceProductViewListItem key={product.id} product={product} />
             ) : (
