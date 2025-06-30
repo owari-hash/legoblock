@@ -79,7 +79,7 @@ export default function ProductView() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 5 }}>
-        <Typography variant="h3">Catalog</Typography>
+        <Typography variant="h3">Төрөл</Typography>
 
         <Button
           color="inherit"
@@ -132,7 +132,7 @@ export default function ProductView() {
             page={page}
             productsPerPage={PRODUCTS_PER_PAGE}
             onPageChange={handlePageChange}
-            totalPages={Math.ceil(products.length / PRODUCTS_PER_PAGE)}
+            totalPages={Math.ceil((products?.length || 0) / PRODUCTS_PER_PAGE)}
             loading={loading}
           />
         </Box>
