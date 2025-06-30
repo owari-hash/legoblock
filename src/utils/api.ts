@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IProductItemProps } from 'src/types/product';
 
 const API_BASE_URL = 'http://localhost:8000'; // Assuming your Django backend runs on this URL
 
@@ -8,7 +9,11 @@ interface GetProductsParams {
   sort?: string;
 }
 
-export const getProducts = async (params?: GetProductsParams) => {
+export const getProducts = async (params?: {
+  page?: number;
+  perPage?: number;
+  sort?: string;
+}): Promise<{ items: IProductItemProps[]; totalCount: number }> => {
   try {
     const { page = 1, perPage = 9, sort = 'latest' } = params || {};
 
@@ -18,12 +23,19 @@ export const getProducts = async (params?: GetProductsParams) => {
     queryParams.append('sort', sort);
 
     const response = await axios.get(`${API_BASE_URL}/products/?${queryParams.toString()}`);
-    return response.data; // adjust if your API wraps data differently
+
+    // If your API returns raw list: []
+    // You must wrap it into the format your frontend expects:
+    return {
+      items: response.data.results ?? response.data, // fallback if paginated with `results`
+      totalCount: response.data.count ?? response.data.length,
+    };
   } catch (error) {
     console.error('Error fetching products:', error);
     throw error;
   }
 };
+
 export const getProductById = async (id: string) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/products/${id}/`);

@@ -68,13 +68,21 @@ export default function ProductList({
             md: 'repeat(3, 1fr)',
           }}
         >
-          {(loading ? [...Array(productsPerPage)] : products).map((product, index) =>
-            product ? (
-              <EcommerceProductViewGridItem key={product.id} product={product} />
-            ) : (
-              <EcommerceProductViewGridItemSkeleton key={index} />
-            )
-          )}
+          {loading
+            ? [...Array(productsPerPage)].map((_, index) =>
+                viewMode === 'grid' ? (
+                  <EcommerceProductViewGridItemSkeleton key={index} />
+                ) : (
+                  <EcommerceProductViewListItemSkeleton key={index} />
+                )
+              )
+            : products.map((product) =>
+                viewMode === 'grid' ? (
+                  <EcommerceProductViewGridItem key={product.id} product={product} />
+                ) : (
+                  <EcommerceProductViewListItem key={product.id} product={product} />
+                )
+              )}
         </Box>
       ) : (
         <Stack spacing={4}>
