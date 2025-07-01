@@ -140,7 +140,7 @@ export default function CheckoutView() {
         items: orderItems,
       };
 
-      await axios.post('http://localhost:8000/orders/', orderPayload);
+      await axios.post('http://13.237.58.62/orders/', orderPayload);
 
       reset();
       clearCart();

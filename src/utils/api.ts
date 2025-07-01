@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IProductItemProps } from 'src/types/product';
 
-const API_BASE_URL = 'http://localhost:8000'; // Assuming your Django backend runs on this URL
+const API_BASE_URL = 'http://13.237.58.62'; // Assuming your Django backend runs on this URL
 
 interface GetProductsParams {
   page?: number;

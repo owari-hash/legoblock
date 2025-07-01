@@ -24,14 +24,14 @@ export default function FilterPrice({
     <Stack spacing={2} direction="row" alignItems="center" divider={<div> - </div>} {...other}>
       <TextField
         size="small"
-        label="$ Min"
+        label="Бага ₮"
         type="number"
         value={filterPrice.start === 0 ? '' : filterPrice.start}
         onChange={onChangeStartPrice}
       />
       <TextField
         size="small"
-        label="$ Max"
+        label="Их ₮"
         type="number"
         value={filterPrice.end === 0 ? '' : filterPrice.end}
         onChange={onChangeEndPrice}
