@@ -31,7 +31,7 @@ export default function ProductDetailsDescription({ product }: Props) {
       }}
     >
       <Stack spacing={2}>
-        <Typography variant="h6"> Specifications </Typography>
+        <Typography variant="h6"> Үзүүлэлт </Typography>
 
         {specifications.map((row) => (
           <Stack
@@ -50,7 +50,7 @@ export default function ProductDetailsDescription({ product }: Props) {
       </Stack>
 
       <Stack spacing={2}>
-        <Typography variant="h6"> Description </Typography>
+        <Typography variant="h6"> Тайлбар </Typography>
         <Markdown content={product.description} />
       </Stack>
     </Stack>

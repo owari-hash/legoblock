@@ -18,6 +18,7 @@ import FilterStock from './filter-stock';
 import FilterRating from './filter-rating';
 import FilterShipping from './filter-shipping';
 import FilterCategory from './filter-category';
+import { InputAdornment, TextField } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -31,9 +32,9 @@ const CATEGORY_OPTIONS = [
   'Sony PlayStation',
 ];
 
-const SHIPPING_OPTIONS = ['Fast', 'Saving', 'Free'];
+const SHIPPING_OPTIONS = ['Шуурхай', 'Энгийн', 'Үнэгүй'];
 
-const TAG_OPTIONS = ['Books and Media', 'Pet', 'Electronics', 'Food', 'Automotive and Industrial'];
+const TAG_OPTIONS = ['1x1', '2x1', '3x1', 'Дулаалгатай', 'Хөнгөн'];
 
 // ----------------------------------------------------------------------
 
@@ -164,7 +165,19 @@ export default function EcommerceFilters({ open, onClose }: Props) {
         width: { xs: 1, md: 280 },
       }}
     >
-      <Block title="Category">
+      <TextField
+        fullWidth
+        hiddenLabel
+        placeholder="Хайх..."
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <Iconify icon="carbon:search" width={24} sx={{ color: 'text.disabled' }} />
+            </InputAdornment>
+          ),
+        }}
+      />
+      <Block title="Төрөл">
         <FilterCategory
           selectedTypeId={filters.filterCategories}
           onSelectType={handleChangeCategories}
@@ -172,16 +185,7 @@ export default function EcommerceFilters({ open, onClose }: Props) {
         />
       </Block>
 
-      <Block title="Brand">
-        <FilterBrand
-          filterBrand={filters.filterBrand}
-          onChangeBrand={handleChangeBrand}
-          options={BRAND_OPTIONS}
-          sx={{ mt: 1 }}
-        />
-      </Block>
-
-      <Block title="Price">
+      <Block title="Үнээр эрэмбэлэх">
         <FilterPrice
           filterPrice={filters.filterPrice}
           onChangeStartPrice={handleChangeStartPrice}
@@ -190,20 +194,12 @@ export default function EcommerceFilters({ open, onClose }: Props) {
         />
       </Block>
 
-      <Block title="Shipping">
+      <Block title="Хүргэлтийн төрөл">
         <FilterShipping
           filterShipping={filters.filterShipping}
           onChangeShipping={handleChangeShipping}
           options={SHIPPING_OPTIONS}
           sx={{ mt: 1 }}
-        />
-      </Block>
-
-      <Block title="Ratings">
-        <FilterRating
-          filterRating={filters.filterRating}
-          onChangeRating={handleChangeRating}
-          sx={{ mt: 2 }}
         />
       </Block>
 
@@ -226,7 +222,7 @@ export default function EcommerceFilters({ open, onClose }: Props) {
         startIcon={<Iconify icon="carbon:trash-can" />}
         onClick={handleClearAll}
       >
-        Clear All
+        Цэвэрлэх
       </Button>
     </Stack>
   );

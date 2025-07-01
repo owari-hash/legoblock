@@ -78,7 +78,7 @@ function OptionItem({ option, selected }: OptionItemProps) {
         </Box>
 
         <Box component="span" sx={{ typography: 'h6' }}>
-          {`$${price}`}
+          {`${price}₮`}
         </Box>
       </Stack>
 

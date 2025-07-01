@@ -14,7 +14,7 @@ export default function FilterStock({ filterStock, onChangeStock }: Props) {
     <FormControlLabel
       control={<Switch color="success" checked={filterStock} onChange={onChangeStock} />}
       labelPlacement="start"
-      label="Only in Stock"
+      label="Бэлэн байгаа бүтээгдэхүүн"
       sx={{
         m: 0,
         [`& .${formControlLabelClasses.label}`]: {

@@ -68,7 +68,7 @@ export default function ProductDetailsSummary({ product }: Props) {
   return (
     <>
       <Label color={product.stock ? 'success' : 'error'} sx={{ mb: 3 }}>
-        {product.stock ? 'In Stock' : 'Out of Stock'}
+        {product.stock ? 'Байгаа' : 'Дууссан'}
       </Label>
 
       <Stack spacing={1} sx={{ mb: 2 }}>

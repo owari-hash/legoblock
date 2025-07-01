@@ -1,11 +1,20 @@
+'use client';
+import { Container } from '@mui/material';
+import { useScroll } from 'framer-motion';
+import ScrollProgress from 'src/components/scroll-progress';
+import MainLayout from 'src/layouts/main';
 import CheckoutView from 'src/sections/product/view/product-checkout-view';
 
 // ----------------------------------------------------------------------
 
-export const metadata = {
-  title: 'Checkout',
-};
-
 export default function CheckoutPage() {
-  return <CheckoutView />;
+  const { scrollYProgress } = useScroll();
+  return (
+    <MainLayout>
+      <ScrollProgress scrollYProgress={scrollYProgress} />
+      <Container>
+        <CheckoutView />
+      </Container>
+    </MainLayout>
+  );
 }

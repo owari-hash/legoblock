@@ -8,7 +8,9 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import { RouterLink } from 'src/routes/components';
 import { IProductItemProps } from 'src/types/product';
+import { useCart } from 'src/contexts/cart-context';
 import TextMaxLine from 'src/components/text-max-line';
+import { useSnackbar } from 'notistack';
 
 import ProductPrice from '../../common/product-price';
 import ProductRating from '../../common/product-rating';
@@ -19,9 +21,17 @@ import ProductRating from '../../common/product-rating';
 
 interface Props extends StackProps {
   product: IProductItemProps;
+  onAddToCart?: (product: IProductItemProps) => void;
 }
 
-export default function ProductViewListItem({ product, ...other }: Props) {
+export default function ProductViewListItem({ product, onAddToCart, ...other }: Props) {
+  const { addToCart } = useCart();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity: 1 });
+    enqueueSnackbar(`${product.name} Сагсанд нэмэгдлээ!`, { variant: 'success' });
+  };
+
   return (
     <Stack
       direction="row"
@@ -35,19 +45,18 @@ export default function ProductViewListItem({ product, ...other }: Props) {
     >
       {product.label === 'new' && (
         <Label color="info" sx={{ position: 'absolute', m: 1, top: 0, left: 0, zIndex: 9 }}>
-          NEW
+          ШИНЭ
         </Label>
       )}
 
       {product.label === 'sale' && (
         <Label color="error" sx={{ position: 'absolute', m: 1, top: 0, left: 0, zIndex: 9 }}>
-          SALE
+          ХЯМДРАЛТАЙ
         </Label>
       )}
 
       <Fab
-        component={RouterLink}
-        href={paths.product.details(product.id)}
+        onClick={handleAddToCart}
         className="add-to-cart"
         color="primary"
         size="small"

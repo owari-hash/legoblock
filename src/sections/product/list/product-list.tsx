@@ -12,7 +12,7 @@ import EcommerceProductViewGridItem from '../item/product-view-grid-item';
 import EcommerceProductViewListItemSkeleton from '../item/product-view-list-item-skeleton';
 import EcommerceProductViewGridItemSkeleton from '../item/product-view-grid-item-skeleton';
 
-import { getProducts } from 'src/utils/api'; // your API util to fetch products
+import { getProducts } from 'src/utils/api';
 
 type Props = {
   viewMode: string;
@@ -37,10 +37,8 @@ export default function ProductList({
     setLoading(true);
     const fetchProducts = async () => {
       try {
-        // You may want to extend getProducts to accept sort/page params
-        // e.g., getProducts({ page, perPage: productsPerPage, sort })
         const data = await getProducts({ page, perPage: productsPerPage, sort });
-        setProducts(data.items); // assume API returns { items: [], totalCount: number }
+        setProducts(data.items);
         setTotalPages(Math.ceil(data.totalCount / productsPerPage));
       } catch (error) {
         console.error('Error loading products:', error);
@@ -51,9 +49,6 @@ export default function ProductList({
 
     fetchProducts();
   }, [page, productsPerPage, sort]);
-
-  // slice is no longer needed, since API returns only current page items
-  // but if your API returns all, you can slice here instead
 
   return (
     <>

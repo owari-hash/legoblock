@@ -10,6 +10,8 @@ import MotionLazy from 'src/components/animate/motion-lazy';
 import { SettingsDrawer, SettingsProvider } from 'src/components/settings';
 import { Metadata, Viewport } from 'next';
 import { defaultMetadata } from 'src/config/seo';
+import { CartProvider } from 'src/contexts/cart-context';
+import SnackbarProvider from 'src/components/snackbar/snackbar-provider';
 
 // ----------------------------------------------------------------------
 
@@ -40,13 +42,17 @@ export default function RootLayout({ children }: Props) {
               themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
             }}
           >
-            <ThemeProvider>
-              <MotionLazy>
-                <ProgressBar />
-                <SettingsDrawer />
-                {children}
-              </MotionLazy>
-            </ThemeProvider>
+            <CartProvider>
+              <ThemeProvider>
+                <SnackbarProvider>
+                  <MotionLazy>
+                    <ProgressBar />
+                    <SettingsDrawer />
+                    {children}
+                  </MotionLazy>
+                </SnackbarProvider>
+              </ThemeProvider>
+            </CartProvider>
           </SettingsProvider>
         </LocalizationProvider>
       </body>

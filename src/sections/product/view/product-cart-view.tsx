@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useCart } from 'src/contexts/cart-context';
 
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -15,27 +14,10 @@ import { RouterLink } from 'src/routes/components';
 import CartList from '../../cart/cart-list';
 import CartSummary from '../../cart/cart-summary';
 
-import { IProductItemProps } from 'src/types/product';
-
 // ----------------------------------------------------------------------
 
 export default function ProductCartView() {
-  const [products, setProducts] = useState<IProductItemProps[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get<IProductItemProps[]>('http://localhost:8000/api/products/')
-      .then((res) => {
-        setProducts(res.data);
-      })
-      .catch((err) => {
-        console.error('Failed to fetch products:', err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { totalItems } = useCart();
 
   return (
     <Container
@@ -45,21 +27,19 @@ export default function ProductCartView() {
         pb: { xs: 5, md: 10 },
       }}
     >
-      <Typography variant="h3" sx={{ mb: 5 }}>
-        Shopping Cart
-      </Typography>
-
       <Grid container spacing={{ xs: 5, md: 8 }}>
         <Grid xs={12} md={8}>
-          {loading ? (
-            <Typography>Loading...</Typography>
+          {totalItems === 0 ? (
+            <Typography variant="h6" sx={{ textAlign: 'center', mt: 5 }}>
+              Таны сагс хоосон байна.
+            </Typography>
           ) : (
-            <CartList products={products.slice(0, 4)} />
+            <CartList />
           )}
         </Grid>
 
         <Grid xs={12} md={4}>
-          <CartSummary tax={7} total={357.09} subtotal={89.09} shipping={55.47} discount={16.17} />
+          <CartSummary />
         </Grid>
       </Grid>
 
@@ -70,7 +50,7 @@ export default function ProductCartView() {
         startIcon={<Iconify icon="carbon:chevron-left" />}
         sx={{ mt: 3 }}
       >
-        Continue Shopping
+        Бүтээгдэхүүн рүү буцах
       </Button>
     </Container>
   );

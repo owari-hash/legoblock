@@ -17,7 +17,7 @@ export type IProductItemCompareProps = {
 };
 
 export type IProductItemProps = {
-  id: number;
+  id: string;
   name: string;
   size_length: number;
   size_width: number;

@@ -27,9 +27,9 @@ const VIEW_OPTIONS = [
 ];
 
 const SORT_OPTIONS = [
-  { value: 'latest', label: 'Latest' },
-  { value: 'oldest', label: 'Oldest' },
-  { value: 'popular', label: 'Popular' },
+  { value: 'latest', label: 'Сүүлд нэмэгдсэн' },
+  { value: 'oldest', label: 'Өмнөнө нэмэгдсэн' },
+  { value: 'popular', label: 'Алдартай' },
 ];
 
 export default function ProductView() {
@@ -59,8 +59,6 @@ export default function ProductView() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ py: 5 }}>
-        <Typography variant="h3">Catalog</Typography>
-
         <Button
           color="inherit"
           variant="contained"

@@ -10,23 +10,23 @@ export default function CheckoutNewCardForm() {
     <Stack spacing={2.5} sx={{ pt: 3 }}>
       <RHFTextField
         name="newCard.cardNumber"
-        label="Card Number"
+        label="Картийн дугаар"
         placeholder="XXXX XXXX XXXX XXXX"
         InputLabelProps={{ shrink: true }}
       />
 
       <RHFTextField
         name="newCard.cardHolder"
-        label="Card Holder"
-        placeholder="JOHN DOE"
+        label="Эзэмшигчийн нэр"
+        placeholder="Бат-Эрдэнэ Болд-Эрдэнэ"
         InputLabelProps={{ shrink: true }}
       />
 
       <Stack spacing={2} direction="row">
         <RHFTextField
           name="newCard.expirationDate"
-          label="Expiration Date"
-          placeholder="MM/YY"
+          label="Дуусах хугацаа"
+          placeholder="Сар/Жил"
           InputLabelProps={{ shrink: true }}
         />
         <RHFTextField
@@ -43,7 +43,8 @@ export default function CheckoutNewCardForm() {
         sx={{ typography: 'caption', color: 'text.disabled' }}
       >
         <Iconify icon="carbon:locked" sx={{ mr: 0.5 }} />
-        Your transaction is secured with SSL encryption
+        Таны гүйлгээ аюулгүй байна. Бид таны картын мэдээллийг хамгаалах үүднээс
+        <strong> PCI DSS </strong> стандартыг дагаж мөрддөг.
       </Stack>
     </Stack>
   );

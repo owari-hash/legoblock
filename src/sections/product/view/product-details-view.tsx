@@ -13,7 +13,6 @@ import { _products } from 'src/_mock';
 import ProductDetailsCarousel from '../details/product-details-carousel';
 import ProductDetailsDescription from '../details/product-details-description';
 import ProductDetailsInfo from '../details/product-details-info';
-import ProductDetailsSummary from '../details/product-details-summary';
 
 // ----------------------------------------------------------------------
 
@@ -43,7 +42,7 @@ export default function ProductDetailsView() {
     return (
       <Container sx={{ py: 10 }}>
         <Typography variant="h6" color="error">
-          Product not found!
+          Бараа олдсонгүй. Та дахин оролдоно уу.
         </Typography>
       </Container>
     );
@@ -61,15 +60,13 @@ export default function ProductDetailsView() {
         <Grid xs={12} md={6} lg={7}>
           <ProductDetailsCarousel product={product} />
         </Grid>
-
         <Grid xs={12} md={6} lg={5}>
-          <ProductDetailsSummary product={product} />
+          <ProductDetailsInfo product={product} />
+        </Grid>
+        <Grid xs={12} md={6} lg={5}>
+          <ProductDetailsDescription product={product} />
         </Grid>
       </Grid>
-
-      <ProductDetailsDescription product={product} />
-
-      <ProductDetailsInfo product={product} />
     </Container>
   );
 }

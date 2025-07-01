@@ -59,7 +59,7 @@ export default function ProductItemFeaturedByBrand({ product, sx, ...other }: Pr
             color="inherit"
             variant="contained"
           >
-            Buy Now
+            Худалдаж авах
           </Button>
         </Stack>
       </Stack>

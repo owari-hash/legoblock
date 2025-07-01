@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import axios from 'axios';
 
 import Box from '@mui/material/Box';
@@ -29,28 +27,28 @@ import CheckoutShippingMethod from '../../checkout/checkout-shipping-method';
 import CheckoutShippingDetails from '../../checkout/checkout-shipping-details';
 import CheckoutPersonalDetails from '../../checkout/checkout-personal-details';
 
-import { IProductItemProps } from 'src/types/product';
+import { useCart } from 'src/contexts/cart-context';
 
 // ----------------------------------------------------------------------
 
 const SHIPPING_OPTIONS = [
   {
-    label: 'Free',
+    label: 'Үнэгүй',
     value: 'free',
-    description: '5-7 Days delivery',
+    description: 'Ажлын 5-7 өдөрт ',
     price: 0,
   },
   {
-    label: 'Standard',
+    label: 'Энгийн',
     value: 'standard',
-    description: '3-5 Days delivery',
-    price: 10,
+    description: 'Ажлын 3-5 өдөрт',
+    price: 10000,
   },
   {
-    label: 'Express',
+    label: 'Шуурхай',
     value: 'express',
-    description: '2-3 Days delivery',
-    price: 20,
+    description: 'Ажлын 2-3 өдөрт',
+    price: 20000,
   },
 ];
 
@@ -77,19 +75,7 @@ const PAYMENT_OPTIONS = [
 export default function CheckoutView() {
   const router = useRouter();
   const formOpen = useBoolean();
-
-  const [products, setProducts] = useState<IProductItemProps[]>([]);
-  const [loadingProducts, setLoadingProducts] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get<IProductItemProps[]>('http://localhost:8000/api/products/')
-      .then((res) => setProducts(res.data))
-      .catch((err) => {
-        console.error('Failed to fetch products:', err);
-      })
-      .finally(() => setLoadingProducts(false));
-  }, []);
+  const { cart, clearCart } = useCart();
 
   const EcommerceCheckoutSchema = Yup.object().shape({
     firstName: Yup.string().required('First name is required'),
@@ -97,6 +83,9 @@ export default function CheckoutView() {
     emailAddress: Yup.string().required('Email address is required'),
     phoneNumber: Yup.string().required('Phone number is required'),
     streetAddress: Yup.string().required('Street address is required'),
+    country: Yup.string().required('Country is required'),
+    paymentMethods: Yup.string().required('Payment method is required'),
+    shipping: Yup.string().required('Shipping method is required'),
     city: Yup.string().required('City is required'),
     zipCode: Yup.string().required('Zip code is required'),
   });
@@ -135,12 +124,30 @@ export default function CheckoutView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      const orderItems = cart.map((item) => ({
+        product: item.id,
+        quantity: item.quantity,
+      }));
+
+      const orderPayload = {
+        full_name: `${data.firstName} ${data.lastName}`,
+        phone_number: data.phoneNumber,
+        email: data.emailAddress,
+        delivery_address: `${data.streetAddress}, ${data.city}, ${data.zipCode}, ${data.country}`,
+        notes: '',
+        shipping_method: data.shipping,
+        payment_method: data.paymentMethods,
+        items: orderItems,
+      };
+
+      await axios.post('http://localhost:8000/orders/', orderPayload);
+
       reset();
+      clearCart();
       router.push(paths.landing.orderCompleted);
-      console.log('DATA', data);
+      console.log('Order submitted successfully:', orderPayload);
     } catch (error) {
-      console.error(error);
+      console.error('Failed to submit order:', error);
     }
   });
 
@@ -152,31 +159,27 @@ export default function CheckoutView() {
         pb: { xs: 5, md: 10 },
       }}
     >
-      <Typography variant="h3" sx={{ mb: 5 }}>
-        Checkout
-      </Typography>
-
       <FormProvider methods={methods} onSubmit={onSubmit}>
         <Grid container spacing={{ xs: 5, md: 8 }}>
           <Grid xs={12} md={8}>
             <Stack spacing={5} divider={<Divider sx={{ borderStyle: 'dashed' }} />}>
               <div>
-                <StepLabel title="Personal Details" step="1" />
+                <StepLabel title="Хувийн мэдээлэл" step="1" />
                 <CheckoutPersonalDetails />
               </div>
 
               <div>
-                <StepLabel title="Shipping Details" step="2" />
+                <StepLabel title="Хүргэлтийн мэдээлэл" step="2" />
                 <CheckoutShippingDetails />
               </div>
 
               <div>
-                <StepLabel title="Shipping Method" step="3" />
+                <StepLabel title="Хүргэлтийн сонголт" step="3" />
                 <CheckoutShippingMethod options={SHIPPING_OPTIONS} />
               </div>
 
               <div>
-                <StepLabel title="Payment Method" step="4" />
+                <StepLabel title="Төлбөрийн сонголт" step="4" />
 
                 <CheckoutPaymentMethod options={PAYMENT_OPTIONS} />
 
@@ -190,7 +193,7 @@ export default function CheckoutView() {
                     }
                     onClick={formOpen.onToggle}
                   >
-                    {formOpen.value ? 'Cancel' : 'Add New Card'}
+                    {formOpen.value ? 'Цуцлах' : 'Шинэ карт нэмэх'}
                   </Button>
                 </Stack>
 
@@ -202,19 +205,7 @@ export default function CheckoutView() {
           </Grid>
 
           <Grid xs={12} md={4}>
-            {loadingProducts ? (
-              <Typography>Loading products...</Typography>
-            ) : (
-              <CheckoutOrderSummary
-                tax={7}
-                total={357.09}
-                subtotal={89.09}
-                shipping={55.47}
-                discount={16.17}
-                products={products.slice(0, 3)}
-                loading={isSubmitting}
-              />
-            )}
+            <CheckoutOrderSummary loading={isSubmitting} />
           </Grid>
         </Grid>
       </FormProvider>

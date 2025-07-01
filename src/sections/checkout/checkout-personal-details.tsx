@@ -16,7 +16,7 @@ export default function CheckoutPersonalDetails() {
 
   return (
     <>
-      <Stack direction="row" flexWrap="wrap" alignItems="center" spacing={1} sx={{ mb: 4 }}>
+      {/* <Stack direction="row" flexWrap="wrap" alignItems="center" spacing={1} sx={{ mb: 4 }}>
         <Typography variant="subtitle2">Sign in with:</Typography>
 
         <Button
@@ -32,9 +32,9 @@ export default function CheckoutPersonalDetails() {
         </Button>
 
         <Button color="inherit" variant="outlined" startIcon={<Iconify icon="carbon:email" />}>
-          Continue with Email
+          И-Мэйл хаягаар үргэлжлүүлэх
         </Button>
-      </Stack>
+      </Stack> */}
 
       <Box
         rowGap={2.5}
@@ -42,17 +42,17 @@ export default function CheckoutPersonalDetails() {
         display="grid"
         gridTemplateColumns={{ xs: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
       >
-        <RHFTextField name="firstName" label="First Name" />
+        <RHFTextField name="firstName" label="Овог" />
 
-        <RHFTextField name="lastName" label="Last Name" />
+        <RHFTextField name="lastName" label="Нэр" />
 
-        <RHFTextField name="emailAddress" label="Email Address" />
+        <RHFTextField name="emailAddress" label="И-мэйл хаяг" />
 
-        <RHFTextField name="phoneNumber" label="Phone Number" />
+        <RHFTextField name="phoneNumber" label="Утасны дугаар" />
 
         <RHFTextField
           name="password"
-          label="Password"
+          label="Нууц үг"
           type={passwordShow.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
@@ -67,7 +67,7 @@ export default function CheckoutPersonalDetails() {
 
         <RHFTextField
           name="confirmPassword"
-          label="Password"
+          label="Нууц үг баталгаажуулах"
           type={passwordShow.value ? 'text' : 'password'}
           InputProps={{
             endAdornment: (

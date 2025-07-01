@@ -30,10 +30,10 @@ export default function ProductOrderCompletedView() {
       </m.div>
 
       <Stack spacing={1} sx={{ my: 5 }}>
-        <Typography variant="h3">Your order is complete!</Typography>
+        <Typography variant="h3">Таны захиалга амжилттай!</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          You will be receiving a confirmation email with order details.
+          Мэйл хаягаар захиалгын мэдээлэл илгээгдсэн болно.
         </Typography>
       </Stack>
 
@@ -45,7 +45,7 @@ export default function ProductOrderCompletedView() {
         variant="contained"
         startIcon={<Iconify icon="carbon:chevron-left" />}
       >
-        Continue Shopping
+        Бүтээгдэхүүн рүү буцах
       </Button>
     </Container>
   );

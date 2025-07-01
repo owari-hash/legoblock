@@ -14,28 +14,21 @@ import Iconify from 'src/components/iconify';
 import { IProductItemProps } from 'src/types/product';
 import TextMaxLine from 'src/components/text-max-line';
 import { fPercent, fCurrency } from 'src/utils/format-number';
+import { useCart } from 'src/contexts/cart-context';
 
 // ----------------------------------------------------------------------
 
 type Props = {
-  tax: number;
-  total: number;
-  subtotal: number;
-  shipping: number;
-  discount: number;
-  products?: IProductItemProps[];
   loading?: boolean;
 };
 
-export default function CheckoutOrderSummary({
-  tax,
-  total,
-  subtotal,
-  shipping,
-  discount,
-  products,
-  loading,
-}: Props) {
+export default function CheckoutOrderSummary({ loading }: Props) {
+  const { cart, totalPrice } = useCart();
+
+  const shipping = 0; // Assuming free shipping for now or a fixed value
+  const discount = 0; // Assuming no discount for now
+  const subtotal = totalPrice;
+  const total = subtotal + shipping - discount;
   return (
     <Stack
       spacing={3}
@@ -45,11 +38,11 @@ export default function CheckoutOrderSummary({
         border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.24)}`,
       }}
     >
-      <Typography variant="h6"> Order Summary </Typography>
+      <Typography variant="h6"> Захиалгын мэдээлэл </Typography>
 
-      {!!products?.length && (
+      {!!cart.length && (
         <>
-          {products.map((product) => (
+          {cart.map((product) => (
             <ProductItem key={product.id} product={product} />
           ))}
 
@@ -57,32 +50,8 @@ export default function CheckoutOrderSummary({
         </>
       )}
 
-      <Stack spacing={2}>
-        <Row label="Subtotal" value={fCurrency(subtotal)} />
-
-        <Row label="Shipping" value={fCurrency(shipping)} />
-
-        <Row label="Discount (15%)" value={`-${fCurrency(discount)}`} />
-
-        <Row label="Tax" value={fPercent(tax)} />
-      </Stack>
-
-      <TextField
-        hiddenLabel
-        placeholder="Discount Code"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <Button>Apply</Button>
-            </InputAdornment>
-          ),
-        }}
-      />
-
-      <Divider sx={{ borderStyle: 'dashed' }} />
-
       <Row
-        label="Total"
+        label="Нийт"
         value={fCurrency(total)}
         sx={{
           typography: 'h6',
@@ -97,7 +66,7 @@ export default function CheckoutOrderSummary({
         type="submit"
         loading={loading}
       >
-        Order Now
+        Захиалах
       </LoadingButton>
     </Stack>
   );
@@ -106,7 +75,7 @@ export default function CheckoutOrderSummary({
 // ----------------------------------------------------------------------
 
 type ProductItemProps = StackProps & {
-  product: IProductItemProps;
+  product: IProductItemProps & { quantity: number };
 };
 
 function ProductItem({ product, ...other }: ProductItemProps) {
@@ -133,21 +102,9 @@ function ProductItem({ product, ...other }: ProductItemProps) {
           {fCurrency(product.price_mnt)}
         </Typography>
 
-        <TextField
-          select
-          size="small"
-          variant="outlined"
-          SelectProps={{
-            native: true,
-          }}
-          sx={{ width: 80 }}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </TextField>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          x{product.quantity}
+        </Typography>
       </Stack>
 
       <IconButton>

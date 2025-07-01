@@ -3,9 +3,14 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
+import { useCart } from 'src/contexts/cart-context';
+import Badge from '@mui/material/Badge';
+import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 
 import Logo from 'src/components/logo';
 import { bgBlur } from 'src/theme/css';
@@ -20,6 +25,7 @@ import SettingsButton from '../common/settings-button';
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 import { navConfig } from './config-navigation';
+import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -73,13 +79,8 @@ export default function Header({ headerOnDark }: Props) {
           <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
             <Stack spacing={1} direction="row" alignItems="center">
               <SettingsButton />
+              <CartButton />
             </Stack>
-
-            {mdUp && (
-              <Button variant="contained" color="inherit" onClick={() => setOpenDialog(true)}>
-                Захиалга өгөх
-              </Button>
-            )}
           </Stack>
 
           {!mdUp && <NavMobile data={navConfig} />}
@@ -90,5 +91,17 @@ export default function Header({ headerOnDark }: Props) {
 
       <OrderDialog open={openDialog} onClose={() => setOpenDialog(false)} />
     </AppBar>
+  );
+}
+
+function CartButton() {
+  const { totalItems } = useCart();
+
+  return (
+    <IconButton component={RouterLink} href={paths.landing.cart}>
+      <Badge showZero badgeContent={totalItems} color="error" max={99}>
+        <Iconify icon="carbon:shopping-cart" />
+      </Badge>
+    </IconButton>
   );
 }
